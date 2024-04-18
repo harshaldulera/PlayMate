@@ -71,3 +71,68 @@ body {
     background-color: #444;
   }
   
+  .song-cards {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    justify-content: center; /* Center the cards horizontally */
+  }
+  
+  .song-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    height: 250px;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .song-image {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+  }
+  
+  .song-card-content {
+    padding: 10px;
+  }
+  
+  .audio-player{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #222;
+    color: #fff;
+  }
+
+  .audio-controls{
+    padding: 10px;
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+  }
+  
+  .current-song {
+    margin-right: auto;
+  }
+  
+  .audio-controls input[type="range"] {
+    width: 80%;
+    margin: 0 10px;
+  }
+  
+  .control-button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    background-color: #555;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .control-button:hover {
+    background-color: #777;
+  }

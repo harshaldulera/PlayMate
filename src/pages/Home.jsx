@@ -1,47 +1,21 @@
 import React, { useState, useRef } from 'react';
 import './Home.css';
+import Navbar from '../components/Navbar';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { Card, CardContent, Typography } from '@mui/material';
 
-const Navbar = () => {
-  return (
-    <nav className="navbar">
-      <div className="container">
-        <h1>PlayMate</h1>
-      </div>
-    </nav>
-  );
-};
-
-const Header = () => {
-  return (
-    <header className="header">
-      <div className="container">
-        <h2>Welcome to PlayMate</h2>
-      </div>
-    </header>
-  );
-};
-
-const Footer = () => {
-  return (
-    <footer className="footer">
-      <div className="container">
-        <p>&copy; 2024 PlayMate. All rights reserved.</p>
-      </div>
-    </footer>
-  );
-};
-
-const MusicPlayer = () => {
+const Home = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef(null);
 
   const songs = [
-    { title: 'Animals', src: 'songs/Animals.mp3' },
-    { title: 'Dil toh bacha hai ji', src: 'songs/Dil-toh-bacha-hai-ji.mp3' },
-    { title: 'Kabhi kabhi aditi', src: 'songs/Kabhi-kabhi-aditi.mp3' },
-    { title: 'Dekha Ek Khwab', src: 'songs/Dekha-Ek-Khwab.mp3'}
+    { title: 'Animals', src: 'songs/Animals.mp3', imgSrc: 'images/Animals.png' },
+    { title: 'Dil toh bacha hai ji', src: 'songs/Dil-toh-bacha-hai-ji.mp3', imgSrc: 'images/Dil-toh-bacha-hai-ji.jpg' },
+    { title: 'Kabhi kabhi aditi', src: 'songs/Kabhi-kabhi-aditi.mp3', imgSrc: 'images/kabhi-kabhi-aditi.jpg' },
+    { title: 'Dekha Ek Khwab', src: 'songs/Dekha-Ek-Khwab.mp3', imgSrc: 'images/dekha-ek-khwab.jpg'}
   ];
 
   const togglePlayPause = () => {
@@ -78,39 +52,46 @@ const MusicPlayer = () => {
     <div className="music-player">
       <Navbar />
       <Header />
-      <audio
-        ref={audioRef}
-        src={songs[currentSongIndex].src}
-        onTimeUpdate={updateTime}
-      />
-      <div className="bottom-bar">
-        <p className="current-song">Now Playing: {songs[currentSongIndex].title}</p>
-        <input
-          type="range"
-          value={currentTime}
-          max={audioRef.current ? audioRef.current.duration : 0}
-          onChange={handleTimeChange}
-        />
-        <button className="control-button" onClick={togglePlayPause}>
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-        <button className="control-button" onClick={() => skipSong(false)}>
-          Previous
-        </button>
-        <button className="control-button" onClick={() => skipSong()}>
-          Next
-        </button>
-      </div>
-      <ul className="songs-list">
+      <div className="song-cards">
         {songs.map((song, index) => (
-          <li key={index} onClick={() => setCurrentSongIndex(index)}>
-            {song.title}
-          </li>
+          <Card key={index} onClick={() => setCurrentSongIndex(index)} className="song-card">
+            <img src={song.imgSrc} alt={song.title} className='song-image' />
+            <CardContent>
+              <Typography variant="h6" component="div">
+                {song.title}
+              </Typography>
+            </CardContent>
+          </Card>
         ))}
-      </ul>
+      </div>
+      <div className="audio-player">
+        <audio
+          ref={audioRef}
+          src={songs[currentSongIndex].src}
+          onTimeUpdate={updateTime}
+        />
+        <div className="audio-controls">
+          <div className="current-song">Now Playing: {songs[currentSongIndex].title}</div>
+          <input
+            type="range"
+            value={currentTime}
+            max={audioRef.current ? audioRef.current.duration : 0}
+            onChange={handleTimeChange}
+          />
+          <button className="control-button" onClick={togglePlayPause}>
+            {isPlaying ? 'Pause' : 'Play'}
+          </button>
+          <button className="control-button" onClick={() => skipSong(false)}>
+            Previous
+          </button>
+          <button className="control-button" onClick={() => skipSong()}>
+            Next
+          </button>
+        </div>
+      </div>
       <Footer />
     </div>
   );
 };
 
-export default MusicPlayer;
+export default Home;
