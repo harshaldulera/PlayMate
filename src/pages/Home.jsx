@@ -25,7 +25,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
-        <p>&copy; 2024 Music App. All rights reserved.</p>
+        <p>&copy; 2024 PlayMate. All rights reserved.</p>
       </div>
     </footer>
   );
@@ -41,6 +41,7 @@ const MusicPlayer = () => {
     { title: 'Animals', src: 'songs/Animals.mp3' },
     { title: 'Dil toh bacha hai ji', src: 'songs/Dil-toh-bacha-hai-ji.mp3' },
     { title: 'Kabhi kabhi aditi', src: 'songs/Kabhi-kabhi-aditi.mp3' },
+    { title: 'Dekha Ek Khwab', src: 'songs/Dekha-Ek-Khwab.mp3'}
   ];
 
   const togglePlayPause = () => {
@@ -82,8 +83,8 @@ const MusicPlayer = () => {
         src={songs[currentSongIndex].src}
         onTimeUpdate={updateTime}
       />
-      <div>
-        <p>Now Playing: {songs[currentSongIndex].title}</p>
+      <div className="bottom-bar">
+        <p className="current-song">Now Playing: {songs[currentSongIndex].title}</p>
         <input
           type="range"
           value={currentTime}
